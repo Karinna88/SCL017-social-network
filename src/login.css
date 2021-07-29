@@ -1,12 +1,8 @@
 .containerFondo{
-<<<<<<< HEAD
-  background-image: url("images/popcorn11.jpg");
-=======
   background-image: url("images/fondo1.png");
->>>>>>> 773357785092b8183827a84b1bae38a13968d95e
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100vh; 
+  height: 100vh;
   width: 100%;
   margin: 0;
   position: fixed;
@@ -31,7 +27,7 @@
 
 }
 .logo{
-  width: 70%;
+  width: 50%;
 }
 
 .inputlogIn {
@@ -41,8 +37,6 @@
   margin: 4%;
   width: 80%;
   padding: 2%;
-  font-size: 30px;
- 
 }
 
 .textLogin{
@@ -173,23 +167,7 @@
     margin-left: 300px;
     height: 50px;
   }
-
   .logo{
-<<<<<<< HEAD
-    width: 70%;
-=======
     width: 60%;
->>>>>>> 773357785092b8183827a84b1bae38a13968d95e
   }
-
-  .containerFondo{
-    background-image: url("images/loginFondo.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 100vh; 
-    width: 100%;
-    margin: 0;
-    position: fixed;
-  }
-
 }
