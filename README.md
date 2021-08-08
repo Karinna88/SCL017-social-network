@@ -1,6 +1,6 @@
 # MIRA Red Social
 
-![MIRA](src/images/logo.png)
+![MIRA](src/images/logo-removebg-preview.png)
 
 
 MIRA es una red social que se creó pensando en aquellas personas, que disfrutan de series y peliculas y frente a la gran oferta que existe en diversas plataformas buscan tener referencias si lo que pretenden ver se adecua realmente a sus intereses, para ello necesitan reseñas y opiniones de otros usuarios. Además permite a los usuarios postear sobre estrenos, novedades, buscar aquella pelicula de la cual "no recuerdan el nombre", comentar teorias sobre finales abiertos, entre otras.
