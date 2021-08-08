@@ -81,7 +81,10 @@ Muro:
 ![figma2](src/images/homeFigma.png)
 
 
+### FUTURAS MEJORAS
 
+* Implementar funcionalidad al boton de editar
+* Implemnetar uso de librerias Mock
 ### DESARROLLADORAS
 
 Javiera Herrera
