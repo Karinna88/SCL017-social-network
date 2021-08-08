@@ -72,37 +72,55 @@ const deletePost = (postId) => {
 // PARA EDITAR LOS POST
 const updatePost = (id, updatedPost) => database.collection('post').doc(id).update(updatedPost);
 
-// PARA LOS LIKES
+// Función like
 
 function tooggleLike(postId, uid) {
-  const db = firebase.firestore();
-  const postRef = db.collection('posts').doc(postId);
-  console.log(postRef);
+  const idUser = firebase.auth().currentUser.uid;
+    firebase
+      .firestore()
+      .collection('posts')
+      .doc(postId)
+      .get()
+      .then((doc) => {
+           console.log(doc.data().like);
 
-  db.runTransaction((transaction) => transaction.get(postRef).then((doc) => {
-    if (!doc.exists) {
-      throw 'Document does not exist!';
-    }
-    const post = doc.data();
+           if (isLiked (doc.data().like, idUser)){
+             //aqui se remueve el like
+             firebase.firestore().collection('posts').doc(postId).update({
+               like: firebase.firestore.FieldValue.arrayRemove(idUser),
+             })
+             document.getElementById(`like_${postId}`).innerHTML = doc.data().like.length - 1;
+             document.getElementById(`btn_like_${postId}`).innerText = showFaceLike(doc.data().like.length - 1);
+           }
+           else{
+             //aqui se añade el like
+             firebase.firestore().collection('posts').doc(postId).update({
+               like: firebase.firestore.FieldValue.arrayUnion(idUser),
+             })
+             document.getElementById(`like_${postId}`).innerHTML = doc.data().like.length + 1;
+             document.getElementById(`btn_like_${postId}`).innerText = showFaceLike(doc.data().like.length + 1);
 
-    if (post) {
-      if (post.like && post.like[uid]) {
-        post.countLike--;
-        post.like[uid] = null;
-      } else {
-        post.countLike++;
-        if (!post.like) {
-          post.like = {};
-        }
-        post.like[uid] = true;
-      }
+           }
+
+    });
+}
+
+function showFaceLike(qty){
+  if(qty > 0){
+    return '😍';
+  }else {
+    return '🙂';
+  }
+}
+
+// funcion para ver si el usuario actual esta dentro del array de like
+function isLiked(likes, idUser){
+  for (let i = 0; i < likes.length; i++){
+    if (likes[i] === idUser){
+      return true;
     }
-    transaction.update(postRef, post);
-  })).then(() => {
-    console.log('Transaction successfully committed!');
-  }).catch((error) => {
-    console.log('Transaction failed: ', error);
-  });
+  }
+  return false;
 }
 
 export {

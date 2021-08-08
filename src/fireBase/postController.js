@@ -6,14 +6,14 @@ let imagenURL = '';
 
 function mostrarsaludo() {
   const divName = document.createElement('div');
-  divName.innerHTML = ` 
+  divName.innerHTML = `
   <p id="nombreUsuario"><br> !Hola, ${firebase.auth().currentUser.displayName}! </p>
   `;
   document.getElementById('nombre').appendChild(divName);
 }
 function mostrarNombreUsuario() {
   const divName = document.createElement('div');
-  divName.innerHTML = ` 
+  divName.innerHTML = `
   <p id="nombreUsuario"><br> ${firebase.auth().currentUser.displayName} </p>
   `;
   document.getElementById('nombre').appendChild(divName);
@@ -25,7 +25,7 @@ function mostrarPhoto() {
   if (imagenUsuario) {
     const divphoto = document.createElement('div');
 
-    divphoto.innerHTML = ` 
+    divphoto.innerHTML = `
         <div clase"imgMovie"><img src=${imagenUsuario} ></div>
         `;
     document.getElementById('photo').appendChild(divphoto);
@@ -48,33 +48,29 @@ function listarPosts(idUser) {
             <div class="boxInformation">
               <h1>${data.autor}</h1>
               <p>${fecha}</p>
-              <h2>${data.comentario}</h2> `
-          if(data.imagen) {
-              html += ` <div clase="imgMovie"><img src=${data.imagen} style="width: 100%";></div>`
-          }
-          
-          if(currentUser){
-            
-          html += `<div class="interaction"><button class='like' value='${doc.id}'>`
-          if(data.like[currentUser]) {
-            html += `😍`
-          } else {
-            html += `🙂`
-          }
-          html += `</button><br>`
-          if (data.countLike) {
-            html += `</button><br><p>${data.countLike} Me gusta</p>`
-          }
-          // Condición para que la acción de eliminar y editar solo sean de tus post
-          if (data.userId === firebase.auth().currentUser.uid) {
-            html += `<button  id='editPost' value='${doc.id}' class='btnEdit'><i class="fas fa-pen"></i></button>
-              <button id='deletePost' value='${doc.id}' class='btnDelete'><i class="fas fa-trash-alt"></i></button>
-            </div>`;   
-          }
+              <h2>${data.comentario}</h2> `;
+      if (data.imagen) {
+        html += ` <div clase="imgMovie"><img src=${data.imagen} style="width: 100%";></div>`;
+      }
 
+      if (currentUser) {
+        html += `<div class="interaction" id="${doc.id}" ><button id="btn_like_${doc.id}" class='like' value='${doc.id}'>`;
+        if (data.like.length > 0) {
+          html += '😍';
+        } else {
+          html += '🙂';
         }
-      
-      
+        html += '</button><br>';
+        html += `<br><p id='like_${doc.id}'>${data.like.length}</p> Me gusta`;
+
+        // Condición para que la acción de eliminar y editar solo sean de tus post
+        if (data.userId === firebase.auth().currentUser.uid) {
+          html += `<button  id='editPost' value='${doc.id}' class='btnEdit'><i class="fas fa-pen"></i></button>
+              <button id='deletePost' value='${doc.id}' class='btnDelete'><i class="fas fa-trash-alt"></i></button>
+            </div>`;
+        }
+      }
+
       divPost.innerHTML = html;
       document.getElementById('boxPosted').appendChild(divPost);
     });
