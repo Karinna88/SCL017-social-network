@@ -52,7 +52,7 @@ function obtenerPost(idUser, callBack) {
   }
 }
 
-// funcion para eliminar Post  ******REVISAR
+// funcion para eliminar Post  
 const deletePost = (postId) => {
   console.log(postId);
   const isConfirm = window.confirm('¿Seguro quieres eliminar tu post?');
@@ -71,11 +71,22 @@ const deletePost = (postId) => {
   }
 };
 
-// PARA EDITAR LOS POST
+// PARA EDITAR LOS POST- PENDIENTE!!!!!!!
 const updatePost = (id, updatedPost) => database.collection('post').doc(id).update(updatedPost);
 
-// Función like
 
+// funcion para ver si el usuario actual dio  like
+function isLiked(likes, idUser){
+  for (let i = 0; i < likes.length; i++){
+    if (likes[i] === idUser){
+      return true; //si
+    }
+  }
+  return false; //no like
+}
+
+
+// Función like
 function tooggleLike(postId, uid) {
   const idUser = firebase.auth().currentUser.uid;
     firebase
@@ -91,13 +102,13 @@ function tooggleLike(postId, uid) {
              firebase.firestore().collection('posts').doc(postId).update({
                like: firebase.firestore.FieldValue.arrayRemove(idUser),
              })
-             document.getElementById(`like_${postId}`).innerHTML = doc.data().like.length - 1;
-             document.getElementById(`btn_like_${postId}`).innerText = showFaceLike(doc.data().like.length - 1);
+             document.getElementById(`like_${postId}`).innerHTML = doc.data().like.length - 1; //actualiza contador
+             document.getElementById(`btn_like_${postId}`).innerText = showFaceLike(doc.data().like.length - 1); // actualiza caras
            }
            else{
              //aqui se añade el like
              firebase.firestore().collection('posts').doc(postId).update({
-               like: firebase.firestore.FieldValue.arrayUnion(idUser),
+               like: firebase.firestore.FieldValue.arrayUnion(idUser), //para añadir nvo elemento
              })
              document.getElementById(`like_${postId}`).innerHTML = doc.data().like.length + 1;
              document.getElementById(`btn_like_${postId}`).innerText = showFaceLike(doc.data().like.length + 1);
@@ -107,23 +118,14 @@ function tooggleLike(postId, uid) {
     });
 }
 
-function showFaceLike(qty){
-  if(qty > 0){
+function showFaceLike(cantidadLike){
+  if(cantidadLike > 0){
     return '😍';
   }else {
     return '🙂';
   }
 }
 
-// funcion para ver si el usuario actual esta dentro del array de like
-function isLiked(likes, idUser){
-  for (let i = 0; i < likes.length; i++){
-    if (likes[i] === idUser){
-      return true;
-    }
-  }
-  return false;
-}
 
 export {
   crearPost, obtenerPost, tooggleLike, deletePost, updatePost,
