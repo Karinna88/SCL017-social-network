@@ -5,7 +5,7 @@ function openModal() {
   const modal = document.querySelectorAll('.modal')[0];
 
   document.getElementById('btnRegister').addEventListener('click', (e) => {
-    e.preventDefault();
+  // muestra el Modal
     modalC.style.opacity = '1';
     modalC.style.visibility = 'visible';
     modal.classList.toggle('modal-close');
@@ -36,7 +36,8 @@ function registerUser() {
 
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then((result) => {
-        result.user.updateProfile({
+        //updateProfile, actualiza el nombre del perfil del usuario
+        result.user.updateProfile({ 
           displayName: username,
         });
 
@@ -45,16 +46,17 @@ function registerUser() {
         };
 
         result.user.sendEmailVerification(configuracion)
+
           .catch((error) => {
             console.error(error);
             document.getElementById('messageModal').innerHTML(error.message);
           });
-        // se debe cerrar
-        firebase.auth().signOut();
+        // se debe cerrar para que el user valide primero
+        firebase.auth().signOut(); 
 
         const message = 'Revisa tu email para verificar correo e Inicia Sesión';
         document.getElementById('messageModal').innerHTML = message;
-      })
+      }) //revisar 
 
       .catch((error) => {
         console.log(error);
@@ -81,16 +83,7 @@ function logInGoogle() {
 
 // para cerrar sesión
 function logOut() {
-  document.getElementById('flogOut').addEventListener('click', () => {
-    firebase.auth().signOut()
-      .then(() => {
-        console.log('sesion cerrada');
-        window.location.hash = '';
-      }).catch((error) => {
-        console.log(error);
-      });
-  });
-
+  
   document.getElementById('logOut').addEventListener('click', () => {
     firebase.auth().signOut()
       .then(() => {
@@ -110,10 +103,11 @@ function signIn() {
     const password = document.getElementById('password').value;
 
     firebase.auth().signInWithEmailAndPassword(email, password)
+  // firebase encuentra al user
       .then(() => {
         window.location.href = '#/home';
       })
-
+    // si hay error en la valudación del user
       .catch((error) => {
         console.log(error);
         document.getElementById('message').innerHTML = error;

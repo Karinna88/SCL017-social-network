@@ -8,6 +8,8 @@ onAuth(() => {
 }, () => {
   changeRouter('#/login');
 });
+
+// escucha los cambios de la url
 window.addEventListener('hashchange', () => {
   changeRouter(window.location.hash);
 });

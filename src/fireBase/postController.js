@@ -35,20 +35,23 @@ function mostrarPhoto() {
 // DINAMISMO PARA MOSTRAR POST DE DATABASE
 function listarPosts(idUser) {
   const currentUser = firebase.auth().currentUser.uid;
+
   obtenerPost(idUser, (querySnapshot) => {
     document.getElementById('boxPosted').innerHTML = '';
     querySnapshot.forEach((doc) => {
-      //  console.log(`${doc.id} => ${doc.data()}`);
+     
       const data = doc.data();
       const divPost = document.createElement('div');
       divPost.classList.add('card');
       const fecha = new Date(data.fecha.seconds * 1000).toLocaleString();
-      // console.log(doc.id)
+      
       let html = `
             <div class="boxInformation">
               <h1>${data.autor}</h1>
               <p>${fecha}</p>
               <h2>${data.comentario}</h2> `;
+
+      // si existe img, se concatena al HTML actual
       if (data.imagen) {
         html += ` <div clase="imgMovie"><img src=${data.imagen} style="width: 100%";></div>`;
       }
@@ -60,8 +63,10 @@ function listarPosts(idUser) {
         } else {
           html += '🙂';
         }
+
         html += '</button><br>';
         html += `<br><p id='like_${doc.id}'>${data.like.length}</p> Me gusta`;
+
 
         // Condición para que la acción de eliminar y editar solo sean de tus post
         if (data.userId === firebase.auth().currentUser.uid) {
@@ -75,6 +80,7 @@ function listarPosts(idUser) {
       document.getElementById('boxPosted').appendChild(divPost);
     });
 
+
     // Evento para boton DELETE POST
     const btnDeleteList = document.querySelectorAll('#deletePost');
     btnDeleteList.forEach((item) => {
@@ -84,8 +90,7 @@ function listarPosts(idUser) {
     const btnLike = document.querySelectorAll('.like');
     btnLike.forEach((item) => {
       item.addEventListener('click', (e) => {
-        console.log('me diste like', e);
-        tooggleLike(e.target.value, currentUser);
+        tooggleLike(e.target.value, currentUser); //primer parametro id del doc.
       });
     });
   });
@@ -114,15 +119,17 @@ function listenerFile() {
   });
 }
 
+
+// funcion para el boton de publicar
 function listenersPosts() {
   document.getElementById('btnCrearPost').addEventListener('click', () => {
-    const autor = firebase.auth().currentUser.displayName;
+    const autor = firebase.auth().currentUser.displayName; //usuario actual conectado
     const comentario = document.getElementById('textPost').value;
     crearPost(autor, comentario, imagenURL);
   });
 }
 
-// FUNCION PARA MOSTRAR LOS LIKES Y CONTARLOS
+
 
 export {
   listenersPosts, listarPosts, listenerFile, mostrarNombreUsuario, mostrarPhoto, mostrarsaludo,

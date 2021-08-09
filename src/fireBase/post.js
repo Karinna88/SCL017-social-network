@@ -1,47 +1,49 @@
 import { listarPosts } from './postController.js';
 
+
 function crearPost(autor, comentario, imagen) {
-  const textPost = document.getElementById('textPost').value;
-  if (textPost.length === 0) {
+  
+  if (comentario.length === 0) {
     alert('Ingresa un texto valido');
   } else {
-    const dataBase = firebase.firestore();
-    const obj = {
-      autor,
-      comentario,
-      imagen,
+   
+    const documentPost = {
+      autor: autor,
+      comentario: comentario,
+      imagen: imagen,
       fecha: firebase.firestore.FieldValue.serverTimestamp(),
-      like: [],
-      userId: firebase.auth().currentUser.uid, // para agregar id al documento de firestore
+      like: [], // se llena con los userId que dan like
+      userId: firebase.auth().currentUser.uid, // id del user que escribio el post
       userName: firebase.auth().currentUser.displayName,
-
     };
 
-    return dataBase.collection('posts').add(obj)
+    firebase.firestore().collection('posts').add(documentPost)
       .then(() => {
-        // console.log("Id del post => ${refDoc.id}")
         listarPosts();
       })
 
       .catch(() => {
-        // alert('error creando el post => ${error}');
         alert('error creando el post');
       });
   }
-  return false;
 }
+  
 
 // CON ESTA FUNCIÓN VAMOS A OBTENER LA LISTA DE POSTS
 
 function obtenerPost(idUser, callBack) {
-  //  console.log(idUser);
+
   const dataBase = firebase.firestore();
+
+  // solo para perfil
   if (idUser) {
     dataBase.collection('posts')
       .orderBy('fecha', 'desc')// para que aparezcan los post en orden/
       .where('userId', '==', firebase.auth().currentUser.uid)
       .get()
       .then(callBack);
+
+      // para home
   } else {
     dataBase.collection('posts')
       .orderBy('fecha', 'desc')// para que aparezcan los post en orden/

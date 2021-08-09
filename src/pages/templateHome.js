@@ -25,7 +25,7 @@ export const home = `
        </div>
       <footer class="footer">
          <a  href="#/perfil"><i class="fa fa-user"> </i><br> Mi Perfil</a>
-         <a  id="flogOut"><i class="fa fa-power-off"> </i><br>Salir</a>
+         <a  id="logOut"><i class="fa fa-power-off"> </i><br>Salir</a>
        </footer>
   </div>
 `;

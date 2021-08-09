@@ -26,7 +26,7 @@ export const perfil = `
    </div>
    <footer class="footer">
     <a  href="#/home"><i class="fa fa-home"> </i><br>Home</a>
-    <a id="flogOut"><i class="fa fa-power-off"> </i><br>Salir</a>
+    <a id="logOut"><i class="fa fa-power-off"> </i><br>Salir</a>
   </footer>
   </div>
 `;

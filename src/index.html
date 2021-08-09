@@ -19,9 +19,9 @@
     <div id="root">
     </div>
     
-   <!-- <img style="width: 100%; " >   
+  
     
-    <!-- -----------   CONFIGURACIÓN DE FIREBASE ------------- -->
+    <!-- -----------  FIREBASE ------------- -->
 
     <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-analytics.js"></script>
@@ -30,6 +30,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-storage.js"></script>  <!-- PARA SUBIR IMAGENES-->
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-storage.js"></script>
 
+    <!-- configuración con todos los servicios habilitados -->
     <script>
       var firebaseConfig = {
         apiKey: "AIzaSyBHTyqk4ajz0njIfMyDR9SZNLeLe_FYM4c",
@@ -45,7 +46,8 @@
       firebase.initializeApp(firebaseConfig);
       firebase.analytics();
     </script>
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
+
+   
 
     <script type="module" src="main.js"></script>
     <script type="module" src="fireBase/post.js"></script> 
