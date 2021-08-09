@@ -21,7 +21,7 @@ function mostrarNombreUsuario() {
 
 function mostrarPhoto() {
   const imagenUsuario = firebase.auth().currentUser.photoURL;
-
+//solo si tiene imagen
   if (imagenUsuario) {
     const divphoto = document.createElement('div');
 
@@ -102,7 +102,7 @@ function listenerFile() {
   document.getElementById('file').addEventListener('change', (e) => {
     const file = e.target.files[0];
     const storageRef = firebase.storage().ref(`imagen/${file.name}`);
-    const task = storageRef.put(file);
+    const task = storageRef.put(file); //añade img al storage
 
     task.on('state_changed', (snapshot) => {
       const percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
