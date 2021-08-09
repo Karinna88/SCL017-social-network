@@ -7,9 +7,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Maven+Pro&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="login.css">
-    <link rel="stylesheet" type="text/css" href="home.css">
-    <link rel="stylesheet" type="text/css" href="perfil.css">
+    <link rel="stylesheet" type="text/css" href="style/login.css">
+    <link rel="stylesheet" type="text/css" href="style/home.css">
+    <link rel="stylesheet" type="text/css" href="style/perfil.css">
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -19,9 +19,9 @@
     <div id="root">
     </div>
     
-   <!-- <img style="width: 100%; " >   
+  
     
-    <!-- -----------   CONFIGURACIÓN DE FIREBASE ------------- -->
+    <!-- -----------  FIREBASE ------------- -->
 
     <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-analytics.js"></script>
@@ -30,15 +30,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-storage.js"></script>  <!-- PARA SUBIR IMAGENES-->
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-storage.js"></script>
 
-
-    
-
-
-
-
-
-
-
+    <!-- configuración con todos los servicios habilitados -->
     <script>
       var firebaseConfig = {
         apiKey: "AIzaSyBHTyqk4ajz0njIfMyDR9SZNLeLe_FYM4c",
@@ -54,7 +46,8 @@
       firebase.initializeApp(firebaseConfig);
       firebase.analytics();
     </script>
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
+
+   
 
     <script type="module" src="main.js"></script>
     <script type="module" src="fireBase/post.js"></script> 

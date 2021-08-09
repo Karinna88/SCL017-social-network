@@ -1,6 +1,6 @@
 # MIRA Red Social
 
-![MIRA](src/images/logo.png)
+![MIRA](src/images/logo-removebg-preview.png)
 
 
 MIRA es una red social que se creó pensando en aquellas personas, que disfrutan de series y peliculas y frente a la gran oferta que existe en diversas plataformas buscan tener referencias si lo que pretenden ver se adecua realmente a sus intereses, para ello necesitan reseñas y opiniones de otros usuarios. Además permite a los usuarios postear sobre estrenos, novedades, buscar aquella pelicula de la cual "no recuerdan el nombre", comentar teorias sobre finales abiertos, entre otras.
@@ -54,9 +54,8 @@ _Criterios de Aceptación:_
 * Sitio responsive, (mobile first), usando flexbox, grid layout y media queries para celulares y tablets
 * Se usó [Firebase](https://firebase.google.com/) como plataforma de desarrollo.
 * Se recibió _code review_ de al menos una compañera de otro equipo.
-* Se realizaron _test_ unitarios y, además, testeos del producto manualmente.
+* Se realizaron testeos del producto manualmente.
 * Se realizaron  _pruebas_ de usabilidad y el _feedback_ del usuario fue incorporado.
-* Existen etiquetas git tag, de la versión.
 * Deploy del proyecto.
 -+
 ## PROTOTIPADO
@@ -67,26 +66,25 @@ Una vez identificado el problema y el tipo de usuario, se procedió a diseñar l
 
 ![baja](src/images/propoBaja.jpg)
 
-## Prototipo de alta fidelidad (Figma): https://www.figma.com/file/EmztTJd6TLyGL9t3UfGohS/Red-Social?node-id=178%3A63
+## Prototipo de alta fidelidad (Figma):
+https://www.figma.com/file/EmztTJd6TLyGL9t3UfGohS/Red-Social?node-id=178%3A63
 
 Inicio y Registro de Usuario:
 
-![FIGMA1](src/images/figmaInicio.png)
+![FIGMA1](src/images/loginFigma.png)
 
-![figma2](src/images/figmaRegistro.png)
+![figma2](src/images/registroFigma.png)
 
-<!-- pendiente -->
 
 Muro:
 
-<!-- pendiente -->
+![figma2](src/images/homeFigma.png)
 
-[Link a Proyecto en Figma]()
 
-## TESTEOS DE USUARIOS
+### FUTURAS MEJORAS
 
-<!-- PENDIENTE -->
-
+* Implementar funcionalidad al boton de editar
+* Implemnetar uso de librerias Mock
 ### DESARROLLADORAS
 
 Javiera Herrera

@@ -1,126 +1,136 @@
-import { crearPost, obtenerPost } from "./post.js"
-import { likePost, showLikes } from './postInteraction.js';
+import {
+  crearPost, obtenerPost, deletePost, tooggleLike,
+} from './post.js';
 
-var imagenURL="";
+let imagenURL = '';
 
-
-
-
-function mostrarsaludo () {
-  const divName = document.createElement('div')
-  divName.innerHTML = ` 
+function mostrarsaludo() {
+  const divName = document.createElement('div');
+  divName.innerHTML = `
   <p id="nombreUsuario"><br> !Hola, ${firebase.auth().currentUser.displayName}! </p>
-  `
-  document.getElementById('nombre').appendChild(divName)
+  `;
+  document.getElementById('nombre').appendChild(divName);
 }
-function mostrarNombreUsuario () { 
-  const divName = document.createElement('div')
-  divName.innerHTML = ` 
+function mostrarNombreUsuario() {
+  const divName = document.createElement('div');
+  divName.innerHTML = `
   <p id="nombreUsuario"><br> ${firebase.auth().currentUser.displayName} </p>
-  `
+  `;
   document.getElementById('nombre').appendChild(divName);
 }
 
+function mostrarPhoto() {
+  const imagenUsuario = firebase.auth().currentUser.photoURL;
 
-function mostrarPhoto () { 
-    const divphoto = document.createElement('div')
-    const imagenUsuario = firebase.auth().currentUser.photoURL
+  if (imagenUsuario) {
+    const divphoto = document.createElement('div');
 
-      if (imagenUsuario =! null ){
-        divphoto.innerHTML = ` 
+    divphoto.innerHTML = `
         <div clase"imgMovie"><img src=${imagenUsuario} ></div>
-        </div>
-        ` 
-        document.getElementById('photo').appendChild(divphoto)
-      }
-      else divphoto.innerHTML = ` 
-        <div ></div>
-        </div>
-        ` 
-        document.getElementById('photo').appendChild(divphoto)
-    } 
+        `;
+    document.getElementById('photo').appendChild(divphoto);
+  }
+}
 
+// DINAMISMO PARA MOSTRAR POST DE DATABASE
+function listarPosts(idUser) {
+  const currentUser = firebase.auth().currentUser.uid;
 
-//DINAMISMO PARA MOSTRAR POST DE DATABASE
-function listarPosts() {
-  obtenerPost((querySnapshot)=>{
-    document.getElementById('boxPosted').innerHTML = ''
+  obtenerPost(idUser, (querySnapshot) => {
+    document.getElementById('boxPosted').innerHTML = '';
     querySnapshot.forEach((doc) => {
-    //  console.log(`${doc.id} => ${doc.data()}`);
-      let data = doc.data()
-      const divPost = document.createElement('div')
-      divPost.classList.add('card') 
-      var fecha = new Date(data.fecha.seconds*1000).toLocaleString()
-      //console.log(doc.id)
-      let html = `
-      <div class="boxInformation">
-      <h1>${data.autor}</h1>
-      <p>${fecha}</p>
-      <h2>${data.comentario}</h2> `
-      
-      if(data.imagen) {
-        html += ` <div clase="imgMovie"><img src=${data.imagen} style="width: 100%";></div>`
-      }
      
-      html += `</div>
-    <div class="boxBtn">
-      <div class="like-container">
-      <button id='like' class='likeButton' value='${doc.id}'> <i  class="fa fa-heart-o">  Like</i> </button>
-          <br>
-          <p>${data.like.length}</p>
-      </div>
-    </div>
-      `
-    divPost.innerHTML = html
-    document.getElementById('boxPosted').appendChild(divPost)
+      const data = doc.data();
+      const divPost = document.createElement('div');
+      divPost.classList.add('card');
+      const fecha = new Date(data.fecha.seconds * 1000).toLocaleString();
+      
+      let html = `
+            <div class="boxInformation">
+              <h1>${data.autor}</h1>
+              <p>${fecha}</p>
+              <h2>${data.comentario}</h2> `;
 
-    const likeButton = document.querySelectorAll('#like');
-    likeButton.forEach((item) => {
-      //console.log("perro",item.value,"gato", item)
-      item.addEventListener('click', () => likePost(item.value, item));
+      // si existe img, se concatena al HTML actual
+      if (data.imagen) {
+        html += ` <div clase="imgMovie"><img src=${data.imagen} style="width: 100%";></div>`;
+      }
+
+      if (currentUser) {
+        html += `<div class="interaction" id="${doc.id}" ><button id="btn_like_${doc.id}" class='like' value='${doc.id}'>`;
+        if (data.like.length > 0) {
+          html += '😍';
+        } else {
+          html += '🙂';
+        }
+
+        html += '</button><br>';
+        html += `<br><p id='like_${doc.id}'>${data.like.length}</p> Me gusta`;
+
+
+        // Condición para que la acción de eliminar y editar solo sean de tus post
+        if (data.userId === firebase.auth().currentUser.uid) {
+          html += `<button  id='editPost' value='${doc.id}' class='btnEdit'><i class="fas fa-pen"></i></button>
+              <button id='deletePost' value='${doc.id}' class='btnDelete'><i class="fas fa-trash-alt"></i></button>
+            </div>`;
+        }
+      }
+
+      divPost.innerHTML = html;
+      document.getElementById('boxPosted').appendChild(divPost);
     });
-    likeButton.forEach((item) => {
-    //  console.log("el otro")
-      item.addEventListener('onload', showLikes(item.value, item));
+
+
+    // Evento para boton DELETE POST
+    const btnDeleteList = document.querySelectorAll('#deletePost');
+    btnDeleteList.forEach((item) => {
+      item.addEventListener('click', () => deletePost(item.value));
+    });
+
+    const btnLike = document.querySelectorAll('.like');
+    btnLike.forEach((item) => {
+      item.addEventListener('click', (e) => {
+        tooggleLike(e.target.value, currentUser); //primer parametro id del doc.
+      });
     });
   });
-  })
 }
 
-//OBTENER IMAGEN PARA POTS
+// OBTENER IMAGEN PARA POTS
 function listenerFile() {
-  var uploader = document.getElementById('uploader');
-  document.getElementById('file').addEventListener('change', (e) =>{
-    var file = e.target.files[0];
-    var storageRef = firebase.storage().ref('imagen/'+file.name);
-    var task = storageRef.put(file);
-    
-    task.on('state_changed', function progress(snapshot) {
-        var percentage = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
-        uploader.value = percentage;
-    
-      }, function error(err) {
-        console.error(err)
-    
-      }, function complete() {
-        alert("completado");
-        task.snapshot.ref.getDownloadURL().then(function(downloadURL) {
-          console.log('File available at', downloadURL);
-          imagenURL = downloadURL
-        });
-      });
+  const uploader = document.getElementById('uploader');
+  document.getElementById('file').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    const storageRef = firebase.storage().ref(`imagen/${file.name}`);
+    const task = storageRef.put(file);
 
+    task.on('state_changed', (snapshot) => {
+      const percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      uploader.value = percentage;
+    }, (err) => {
+      console.error(err);
+    }, () => {
+      alert('completado');
+      task.snapshot.ref.getDownloadURL().then((downloadURL) => {
+        console.log('File available at', downloadURL);
+        imagenURL = downloadURL;
+      });
     });
+  });
 }
 
 
+// funcion para el boton de publicar
 function listenersPosts() {
-  document.getElementById('btnCrearPost').addEventListener('click',()=>{ 
-    let autor = firebase.auth().currentUser.displayName;
-    let comentario = document.getElementById('textPost').value
-    crearPost( autor , comentario , imagenURL )
-  })
-} ;
+  document.getElementById('btnCrearPost').addEventListener('click', () => {
+    const autor = firebase.auth().currentUser.displayName; //usuario actual conectado
+    const comentario = document.getElementById('textPost').value;
+    crearPost(autor, comentario, imagenURL);
+  });
+}
 
 
-export { listenersPosts, listarPosts, listenerFile , mostrarNombreUsuario , mostrarPhoto, mostrarsaludo}
+
+export {
+  listenersPosts, listarPosts, listenerFile, mostrarNombreUsuario, mostrarPhoto, mostrarsaludo,
+};

@@ -1,10 +1,10 @@
 const error404 = () => {
-    const view = `
+  const view = `
     <div class= "error404">
     <h2> Error 404 </h2>
     </div>
     `;
-    return view;
+  return view;
 };
 
 export default error404;

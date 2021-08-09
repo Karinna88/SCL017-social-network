@@ -1,5 +1,5 @@
 .containerFondo{
-  background-image: url("images/fondo1.png");
+  background-image: url("../images/fondo1.png");
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
@@ -31,7 +31,7 @@
 }
 
 .inputlogIn {
-  /* filter: drop-shadow(1px 2px 2px gray); */
+  filter: drop-shadow(1px 2px 2px gray); 
   border: 1px solid black;
   border-radius: 8px;
   margin: 4%;
@@ -72,8 +72,8 @@
 
 /* MODAL */
 .modal-container {
-    opacity: 0;
-    visibility: hidden;
+    /* opacity: 0;
+    visibility: hidden; */
     position: fixed;
     z-index: 1000;
     width: 100%;
@@ -83,15 +83,16 @@
     background: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items:center;
+ 
   }
 
 .modal {
-    font-family: "Jura", sans-serif;
+   
     font-size: 20px;
     font-style: bold;
-    width: 50%;
-    height: 65%;
+    /* width: 80%;
+    height: 80%; */
     background: #fff;
     text-align: center;
     display: flex;
@@ -126,7 +127,7 @@
   }
 
   .contentModal > div {
-    width: 60%;
+    width: 100%;
   }
 
   input[type=text], input[type=password], input[type=email] {
@@ -147,27 +148,118 @@
 
 .contentModal h1{
     color: #38B6FF; 
-    font-size: 40px;
-   
+    font-size: 40px; 
 }
 
 .textModal {
   color: #EBC43B ;
   font-weight: bold;
   font-size: 30px;
-
 }
 
 .textInicioModal, .textFormModal{
   margin: 10px;
 }
 
+
+/* RESPONSIVE */
 @media only screen  and (min-width:769px ) {
   .containerDiv{
-    margin-left: 300px;
     height: 50px;
   }
   .logo{
     width: 60%;
   }
+
+  /* MODAL */
+.modal-container {
+  opacity: 0;
+  visibility: hidden;
+  position: fixed;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+ 
+  font-size: 20px;
+  font-style: bold;
+  width: 50%;
+  height: 65%;
+  background: #fff;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  position: relative;
+  transition: transform 1s;
+  transform: translateY(0%);
+
+}
+
+.close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+  background: #FF1663;
+  color: #fff;
+  line-height: 25px;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.modal-close {
+  transform: translateY(-200%);
+}
+
+.contentModal{
+  display: flex;
+}
+
+.contentModal > div {
+  width: 60%;
+}
+
+input[type=text], input[type=password], input[type=email] {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #9e9e9e;
+  border-radius: 0;
+  outline: none;
+  height: 3rem;
+  width: 100%;
+  font-size: 1rem;
+  margin: 0 0 20px 0;
+  padding: 0;
+  box-shadow: none;
+  box-sizing: content-box;
+  transition: all 0.3s;
+}
+
+.contentModal h1{
+  color: #38B6FF; 
+  font-size: 40px;
+ 
+}
+
+.textModal {
+color: #EBC43B ;
+font-weight: bold;
+font-size: 30px;
+
+}
+
+.textInicioModal, .textFormModal{
+margin: 10px;
+}
 }

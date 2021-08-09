@@ -1,4 +1,3 @@
-
 export const templateRegistro = `
 
    <div class="modal-container">
@@ -41,5 +40,3 @@ export const templateRegistro = `
        </div>
   </div>
    `;
-
-   

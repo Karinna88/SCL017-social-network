@@ -1,8 +1,7 @@
-import {templateRegistro} from './templateRegistro.js'
+import { templateRegistro } from './templateRegistro.js';
 
 export const templateInicioSesion = () => {
-   
-    const templateInicioSesion = `
+  const templateInicioSesion = `
 
    
             <main id="homeSigIn" class= "containerFondo">
@@ -41,7 +40,5 @@ export const templateInicioSesion = () => {
         </main>  
         `;
 
-   return  templateInicioSesion + templateRegistro;
-  
-
-}
+  return templateInicioSesion + templateRegistro;
+};
