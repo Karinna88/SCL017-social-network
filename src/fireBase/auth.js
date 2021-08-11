@@ -42,7 +42,7 @@ function registerUser() {
         });
 
         const configuracion = {
-          url: 'http://localhost:5000/',
+          url: 'http://localhost:5000/', //revisar
         };
 
         result.user.sendEmailVerification(configuracion)

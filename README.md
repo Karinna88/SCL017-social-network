@@ -3,7 +3,7 @@
 ![MIRA](src/images/logo-removebg-preview.png)
 
 
-MIRA es una red social que se creó pensando en aquellas personas, que disfrutan de series y peliculas y frente a la gran oferta que existe en diversas plataformas buscan tener referencias si lo que pretenden ver se adecua realmente a sus intereses, para ello necesitan reseñas y opiniones de otros usuarios. Además permite a los usuarios postear sobre estrenos, novedades, buscar aquella pelicula de la cual "no recuerdan el nombre", comentar teorias sobre finales abiertos, entre otras.
+**MIRA** es una red social que se creó pensando en aquellas personas, que disfrutan de series y peliculas y frente a la gran oferta que existe en diversas plataformas buscan tener referencias si lo que pretenden ver se adecua realmente a sus intereses, para ello necesitan reseñas y opiniones de otros usuarios. Además permite a los usuarios postear sobre estrenos, novedades, buscar aquella pelicula de la cual "no recuerdan el nombre", comentar teorias sobre finales abiertos, entre otras.
 
 ## PLANIFICACIÓN
 
@@ -47,7 +47,7 @@ _Criterios de Aceptación:_
 * Al dar click para editar un post, debe cambiar el input que permita editar y guardar los cambios.
 * Al recargar la página debo de poder ver los textos editados.
 
-## CONSIDERACIONES TÉCNICAS
+## CONSIDERACIONES TÉCNICAS  :pushpin:
 
 * La lógica del proyecto fue implementada usando JS, HTML y CSS.
 * La app cuenta con multiples vistas (Single Page Application (SPA)), gestionadas por un archivo (router.js) que permite su visualización, dependiendo de las elecciones del usuario.
@@ -81,11 +81,11 @@ Muro:
 ![figma2](src/images/homeFigma.png)
 
 
-### FUTURAS MEJORAS
+### FUTURAS MEJORAS  :paperclip:
 
 * Implementar funcionalidad al boton de editar
 * Implemnetar uso de librerias Mock
-### DESARROLLADORAS
+### DESARROLLADORAS :woman:
 
 Javiera Herrera
 
